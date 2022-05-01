@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
-import { API } from "../helpers/API";
+import { Map } from "./Map";
+import { weatherAppAPI } from "../helpers/API"
 
 
 
@@ -12,7 +13,7 @@ export const Weather = () => {
 
     const getDataCity = async (city) => {
         try {
-            let res = await axios.get(`/weather?q=${city}&appid=${API}`);
+            let res = await axios.get(`/weather?q=${city}&appid=${weatherAppAPI}`);
             setData(res.data);
         } catch (err) {
             console.log(err)
@@ -34,22 +35,10 @@ export const Weather = () => {
 
     return (
         <>
-            <button onClick={() => { getDataCity("chennai") }}>City</button>
+            <button onClick={() => { getDataCity("delhi") }}>City</button>
             <button onClick={getDataLocation}>Current Location</button>
 
-            <div className="mapouter">
-                <div className="gmap_canvas">
-                    <iframe width="600"
-                        height="500"
-                        id="gmap_canvas"
-                        src="https://maps.google.com/maps?q=delhi&t=&z=13&ie=UTF8&iwloc=&output=embed"
-                        frameBorder="0"
-                        scrolling="no"
-                        marginHeight="0"
-                        marginWidth="0">
-                    </iframe>
-                </div>
-            </div>
+            {/* <Map city={'Delhi'} /> */}
         </>
     );
 };
