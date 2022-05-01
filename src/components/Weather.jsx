@@ -1,7 +1,10 @@
 import axios from "axios";
-import { useState } from "react";
+import { Children, useState } from "react";
 import { Map } from "./Map";
 import { weatherAppAPI } from "../helpers/API"
+import { Navbar } from "./Navbar";
+import { Box, Flex, Grid, Heading } from "@chakra-ui/react";
+import { Deatils } from "./Details";
 
 
 
@@ -23,7 +26,7 @@ export const Weather = () => {
     const success = async (position) => {
         let { latitude, longitude } = position.coords;
         try {
-            let res = await axios.get(`/weather?lat=${latitude}&lon=${longitude}&appid=${API}`);
+            let res = await axios.get(`/weather?lat=${latitude}&lon=${longitude}&appid=${weatherAppAPI}`);
             setData(res.data);
         } catch (err) {
             console.log(err)
@@ -35,10 +38,13 @@ export const Weather = () => {
 
     return (
         <>
-            <button onClick={() => { getDataCity("delhi") }}>City</button>
-            <button onClick={getDataLocation}>Current Location</button>
+            <Navbar />
+            {/* <button onClick={() => { getDataCity("delhi") }}>City</button> */}
+            {/* <button onClick={getDataLocation}>Current Location</button> */}
 
             {/* <Map city={'Delhi'} /> */}
+
+            <Deatils />
         </>
     );
 };

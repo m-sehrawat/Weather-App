@@ -5,8 +5,8 @@ export const Map = ({ city }) => {
     return (
         <div>
             <iframe
-                width="600"
-                height="450"
+                width="100%"
+                height="300"
                 loading="lazy"
                 allowFullScreen
                 referrerPolicy="no-referrer-when-downgrade"
