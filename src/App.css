@@ -11,3 +11,12 @@
         transform: rotate(360deg);
     }
 }
+
+.zoom {
+    transition: all 0.5s linear;
+}
+
+.zoom:hover {
+    transform: scale(1.1);
+    ;
+}

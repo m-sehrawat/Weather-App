@@ -21,7 +21,6 @@ export const Deatils = () => {
 
     useEffect(() => {
         let weather = getItem("weather");
-        console.log('weather:', weather)
         !weather && dispatch(getWeatherByLocation(toast));
     }, []);
 
@@ -61,7 +60,7 @@ export const Deatils = () => {
                                     <Text key={i} color={'#5e82f4'} fontWeight={500} mt={'15px'} fontSize={'18px'} >{e}</Text>
                                 ))}
                             </Box>
-                            <Box borderRadius={'30px'} bg={'#5e82f4'} py={'10px'} pl={'15%'}>
+                            <Box className="zoom" borderRadius={'30px'} bg={'#5e82f4'} py={'10px'} pl={'15%'}>
                                 <NewText>{celsius(data.main.feels_like)}<sup>o</sup> C</NewText>
                                 <NewText>{data.main.humidity}%</NewText>
                                 <NewText>{(data.wind.speed * 3.6).toFixed(2)} Km/h</NewText>
