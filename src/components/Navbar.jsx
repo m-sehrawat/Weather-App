@@ -1,7 +1,8 @@
-import { Box, Button, Center, Flex, Input, useToast } from "@chakra-ui/react";
+import { Button, Center, Flex, Icon, Input, useToast } from "@chakra-ui/react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { getWeatherByCity } from "../redux/actions";
+import { getWeatherByCity, getWeatherByLocation } from "../redux/actions";
+import { HiLocationMarker } from "react-icons/hi";
 
 export const Navbar = () => {
 
@@ -15,8 +16,12 @@ export const Navbar = () => {
         dispatch(getWeatherByCity(city, toast));
     }
 
+    const handleLocationData = () => {
+        dispatch(getWeatherByLocation(toast));
+    }
+
     return (
-        <Flex h={'70px'} bg={'#d7defa'} justifyContent={'center'}>
+        <Flex p={'10px'} minH={'70px'} bg={'#d7defa'} justifyContent={'center'} flexDirection={['column', 'row']} gap={['10px', '0px']}>
             <Center px={'10px'}>
                 <Input
                     onKeyPress={({ key }) => { key === "Enter" ? handleChnage() : undefined }}
@@ -37,6 +42,19 @@ export const Navbar = () => {
                     Search
                 </Button>
             </Center>
-        </Flex>
+            <Center px={'10px'}>
+                <Button
+                    bg={'#5e82f4'}
+                    _hover={{ 'bg': '5e82f4' }}
+                    color={'white'}
+                    w={'100%'}
+                    borderRadius={'15px'}
+                    leftIcon={<Icon w={'30px'} h={'30px'} as={HiLocationMarker} />}
+                    onClick={handleLocationData}
+                >
+                    Your Location Weather
+                </Button>
+            </Center>
+        </Flex >
     );
 };
