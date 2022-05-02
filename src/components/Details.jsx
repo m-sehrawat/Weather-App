@@ -1,21 +1,22 @@
-import { Box, Flex, Grid, Heading, Icon, Text, useToast } from "@chakra-ui/react";
+import { Box, Flex, Grid, Heading, Icon, Text, useToast, VStack } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { celsius } from "../helpers/extraFunctions";
+import { celsius, dateFormat } from "../helpers/extraFunctions";
 import { getItem } from "../helpers/sessionStorage";
 import { getWeatherByLocation, syncData } from "../redux/actions";
 import { Error } from "./Error";
 import { Loading } from "./Loading";
 import { Map } from "./Map";
 import { FaSyncAlt } from "react-icons/fa";
+import { ImSun } from "react-icons/im";
+import { MdOutlineNightsStay } from "react-icons/md";
 import { ForcastBox, Newbox, NewText } from "./SmallComponents";
 
 
 export const Deatils = () => {
 
-    const isLoading = useSelector((state) => state.isLoading);
-    const data = useSelector((state) => state.weatherData);
-    const isError = useSelector((state) => state.isError);
+    const { isLoading, weatherData: data, forcastData, isError } = useSelector((state) => state);
+
 
     const [isRotate, setIsRotate] = useState(false);
 
@@ -40,7 +41,7 @@ export const Deatils = () => {
         <Error />
     ) : (
         <>
-            <Box maxW={'1300px'} m={'30px auto 10px'} p={'20px'} minH={'550px'} border={'1px solid red'}>
+            <Box maxW={'1400px'} m={'30px auto 10px'} p={'20px'} minH={'550px'}>
                 <Grid gridTemplateColumns={['100%', 'repeat(2, 1fr)', 'repeat(2, 1fr)', '30% 27.5% 38%']} gap={'30px'}>
                     <Newbox>
                         <Box color={'#5e82f4'} p={'20px'} textAlign={'center'}>
@@ -80,14 +81,31 @@ export const Deatils = () => {
 
                 </Grid>
 
-                <Grid mt={'60px'} templateColumns={['repeat(2, 1fr)', 'repeat(3, 1fr)', 'repeat(4, 1fr)', 'repeat(5, 1fr)', 'repeat(7, 1fr)']} gap={'20px'}>
-                    <ForcastBox></ForcastBox>
-                    <ForcastBox></ForcastBox>
-                    <ForcastBox></ForcastBox>
-                    <ForcastBox></ForcastBox>
-                    <ForcastBox></ForcastBox>
-                    <ForcastBox></ForcastBox>
-                    <ForcastBox></ForcastBox>
+                <Grid mt={'60px'} templateColumns={['repeat(2, 1fr)', 'repeat(3, 1fr)', 'repeat(4, 1fr)', 'repeat(5, 1fr)', 'repeat(8, 1fr)']} gap={'20px'}>
+                    {forcastData.map((e) => {
+                        const { date, day } = dateFormat(e.dt);
+
+                        return (
+                            <ForcastBox>
+                                <Box p={'5px'} bg={'#5e82f4'}>
+                                    <Text fontWeight={500} color={'white'} fontSize={'18px'}>{date}</Text>
+                                    <Text fontWeight={500} color={'white'} fontSize={'18px'}>{day}</Text>
+                                </Box>
+                                <Box mt={'10px'}>
+                                    <Text color={'#5e82f4'} fontWeight={500} fontSize={'27px'}>
+                                        <Icon as={ImSun} /> {Math.round(e.temp.day)}<sup>o</sup> C
+                                    </Text>
+                                    <Text color={'#5e82f4'} fontWeight={500} fontSize={'27px'}>
+                                        <Icon as={MdOutlineNightsStay} /> {Math.round(e.temp.night)}<sup>o</sup> C
+                                    </Text>
+                                    <Text color={'#5e82f4'} fontWeight={500} fontSize={'20px'}>
+                                        {e.weather[0].main}
+                                    </Text>
+                                </Box>
+                            </ForcastBox>
+                        )
+                    })}
+
                 </Grid>
             </Box >
         </>
