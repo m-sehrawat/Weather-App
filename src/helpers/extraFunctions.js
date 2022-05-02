@@ -1,0 +1,1 @@
+export const celsius = (x) => (x - 273).toFixed(0);

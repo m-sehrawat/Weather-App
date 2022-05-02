@@ -1,8 +1,9 @@
+import { getItem } from "../helpers/localStorage";
 import { GET_DATA_ERROR, GET_DATA_LOADING, GET_DATA_SUCCESS } from "./actionTypes";
 
 const initState = {
     isLoading: false,
-    weatherData: {},
+    weatherData: getItem("weather") || {},
     isError: false
 }
 

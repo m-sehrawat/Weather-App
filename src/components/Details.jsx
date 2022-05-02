@@ -1,4 +1,6 @@
 import { Box, Grid, Heading, Text } from "@chakra-ui/react";
+import { useSelector } from "react-redux";
+import { celsius } from "../helpers/extraFunctions";
 import { Map } from "./Map";
 
 const Newbox = ({ children }) => {
@@ -9,8 +11,14 @@ const Newbox = ({ children }) => {
     )
 }
 
+const NewText = ({ children }) => <Text color={'white'} fontWeight={500} mt={'15px'} fontSize={'18px'}>{children}</Text>
+
 
 export const Deatils = () => {
+
+    let data = useSelector((state) => state.weatherData);
+    // console.log('weatherData:', weatherData)
+
 
     return (
         <>
@@ -18,27 +26,30 @@ export const Deatils = () => {
                 <Grid gridTemplateColumns={['100%', 'repeat(2, 1fr)', 'repeat(2, 1fr)', '30% 27.5% 38%']} gap={'30px'}>
                     <Newbox>
                         <Box color={'#5e82f4'} px={'20px'} py={'30px'} textAlign={'center'}>
-                            <Heading>Delhi, India</Heading>
-                            <Heading fontSize={'120px'}>16<sup>o</sup>C</Heading>
-                            <Heading>Cloudy</Heading>
+                            <Heading>{data.name}</Heading>
+                            <Heading fontSize={'120px'}>{celsius(data.main.temp)}<sup>o</sup>C</Heading>
+                            <Heading>{data.weather[0].main}</Heading>
                         </Box>
                     </Newbox>
                     <Newbox>
                         <Grid templateColumns={'50% 50%'} h={'100%'} p={'8px'}>
                             <Box py={'10px'} pl={'15%'}>
-                                {['Felt Temp.', 'Humidity', 'Wind', 'Visibility', 'Max Temp.', 'Min Temp.'].map((e) => (
-                                    <Text color={'#5e82f4'} fontWeight={500} mt={'15px'} fontSize={'18px'} >{e}</Text>
+                                {['Felt Temp.', 'Humidity', 'Wind', 'Visibility', 'Max Temp.', 'Min Temp.'].map((e, i) => (
+                                    <Text key={i} color={'#5e82f4'} fontWeight={500} mt={'15px'} fontSize={'18px'} >{e}</Text>
                                 ))}
                             </Box>
                             <Box borderRadius={'30px'} bg={'#5e82f4'} py={'10px'} pl={'15%'}>
-                                {['20 C', 'Humidity', 'Wind', 'Visibility', 'Max Temp.', 'Min Temp.'].map((e) => (
-                                    <Text color={'white'} fontWeight={500} mt={'15px'} fontSize={'18px'} >{e}</Text>
-                                ))}
+                                <NewText>{celsius(data.main.feels_like)}</NewText>
+                                <NewText>{data.main.humidity}</NewText>
+                                <NewText>{data.wind.speed}</NewText>
+                                <NewText>{data.visibility}</NewText>
+                                <NewText>{celsius(data.main.temp_max)}</NewText>
+                                <NewText>{celsius(data.main.temp_min)}</NewText>
                             </Box>
                         </Grid>
                     </Newbox>
                     <Newbox>
-                        <Map />
+                        {/* <Map /> */}
                     </Newbox>
 
                 </Grid>
