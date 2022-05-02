@@ -4,7 +4,7 @@ export const Error = () => {
 
     return (
         <Container mt={['200px', '100px']} p={'100px'}>
-            <Image src='Error.gif' />
+            <Image src='/images/Error.gif' />
         </Container>
     );
 };
