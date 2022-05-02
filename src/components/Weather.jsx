@@ -21,10 +21,10 @@ export const Weather = () => {
     console.log('weatherData:', weatherData)
     console.log('isError:', isError)
 
-    useEffect(() => {
-        let wether = getItem("weather");
-        !wether && dispatch(getWeatherByLocation());
-    }, []);
+    // useEffect(() => {
+    //     let wether = getItem("weather");
+    //     !wether && dispatch(getWeatherByLocation());
+    // }, []);
 
 
 
@@ -51,11 +51,7 @@ export const Weather = () => {
     // const getDataLocation = () => navigator.geolocation.getCurrentPosition(success);
 
 
-    return isLoading ? (
-        <Loading />
-    ) : isError ? (
-        <Error />
-    ) : (
+    return (
         <>
             <Navbar />
             {/* <button onClick={() => { getDataCity("delhi") }}>City</button> */}
