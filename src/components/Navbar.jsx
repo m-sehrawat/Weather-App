@@ -7,8 +7,6 @@ import { HiLocationMarker } from "react-icons/hi";
 export const Navbar = () => {
 
     const [city, setCity] = useState("");
-    console.log('city:', city)
-
     const dispatch = useDispatch();
     const toast = useToast();
 

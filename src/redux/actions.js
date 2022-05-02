@@ -22,9 +22,13 @@ export const getWeatherByLocation = (toast) => (dispatch) => {
         try {
             let { latitude, longitude } = position.coords;
             dispatch(getDataLoading());
-            let res = await axios.get(`/weather?lat=${latitude}&lon=${longitude}&appid=${weatherAppAPI}`);
-            dispatch(getDataSuccess(res.data));
-            setItem("weather", res.data);
+            let weatherData = await axios.get(`/weather?lat=${latitude}&lon=${longitude}&appid=${weatherAppAPI}`);
+            weatherData = weatherData.data;
+            let forcastData = await axios.get(`/onecall?lat=${latitude}&lon=${longitude}&exclude=hourly,minutely&units=metric&appid=${weatherAppAPI}`);
+            forcastData = forcastData.data.daily;
+            let payload = { weatherData, forcastData }
+            dispatch(getDataSuccess(payload));
+            setItem("weather", payload);
             myToast(toast, "Your location weather updated", "success")
         } catch (err) {
             console.log(err);
@@ -43,10 +47,16 @@ export const getWeatherByLocation = (toast) => (dispatch) => {
 export const getWeatherByCity = (city, toast) => async (dispatch) => {
     try {
         dispatch(getDataLoading());
-        let res = await axios.get(`/weather?q=${city}&appid=${weatherAppAPI}`);
-        dispatch(getDataSuccess(res.data));
-        setItem("weather", res.data);
+        let weatherData = await axios.get(`/weather?q=${city}&appid=${weatherAppAPI}`);
+        weatherData = weatherData.data;
+        let { lon, lat } = weatherData.coord;
+        let forcastData = await axios.get(`/onecall?lat=${lat}&lon=${lon}&exclude=hourly,minutely&units=metric&appid=${weatherAppAPI}`);
+        forcastData = forcastData.data.daily;
+        let payload = { weatherData, forcastData };
+        dispatch(getDataSuccess(payload));
+        setItem("weather", payload);
         myToast(toast, "City weather data updated", "success");
+
     } catch (err) {
         console.log(err);
         dispatch(getDataError());
@@ -56,9 +66,14 @@ export const getWeatherByCity = (city, toast) => async (dispatch) => {
 
 export const syncData = (city, toast) => async (dispatch) => {
     try {
-        let res = await axios.get(`/weather?q=${city}&appid=${weatherAppAPI}`);
-        dispatch(getDataSuccess(res.data));
-        setItem("weather", res.data);
+        let weatherData = await axios.get(`/weather?q=${city}&appid=${weatherAppAPI}`);
+        weatherData = weatherData.data;
+        let { lon, lat } = weatherData.coord;
+        let forcastData = await axios.get(`/onecall?lat=${lat}&lon=${lon}&exclude=hourly,minutely&units=metric&appid=${weatherAppAPI}`);
+        forcastData = forcastData.data.daily;
+        let payload = { weatherData, forcastData };
+        dispatch(getDataSuccess(payload));
+        setItem("weather", payload);
         myToast(toast, "Data sync successfully", "success");
     } catch (err) {
         console.log(err);
@@ -66,3 +81,4 @@ export const syncData = (city, toast) => async (dispatch) => {
         myToast(toast, "City weather data doesn't exist", "error");
     }
 }
+

@@ -1,21 +1,23 @@
 import { Box, Flex, Grid, Heading, Icon, Text, useToast } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { shallowEqual, useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { celsius } from "../helpers/extraFunctions";
 import { getItem } from "../helpers/sessionStorage";
-import { getWeatherByCity, getWeatherByLocation, syncData } from "../redux/actions";
+import { getWeatherByLocation, syncData } from "../redux/actions";
 import { Error } from "./Error";
 import { Loading } from "./Loading";
 import { Map } from "./Map";
 import { FaSyncAlt } from "react-icons/fa";
+import { ForcastBox, Newbox, NewText } from "./SmallComponents";
 
 
 export const Deatils = () => {
 
-    const { isLoading, weatherData: data, isError } = useSelector((state) => state, shallowEqual);
-    console.log('data:', data)
+    const isLoading = useSelector((state) => state.isLoading);
+    const data = useSelector((state) => state.weatherData);
+    const isError = useSelector((state) => state.isError);
+
     const [isRotate, setIsRotate] = useState(false);
-    console.log('isRotate:', isRotate)
 
     const dispatch = useDispatch();
     const toast = useToast();
@@ -38,7 +40,7 @@ export const Deatils = () => {
         <Error />
     ) : (
         <>
-            <Box maxW={'1300px'} m={['30px auto']} p={'20px'} h={'560px'}>
+            <Box maxW={'1300px'} m={'30px auto 10px'} p={'20px'} minH={'550px'} border={'1px solid red'}>
                 <Grid gridTemplateColumns={['100%', 'repeat(2, 1fr)', 'repeat(2, 1fr)', '30% 27.5% 38%']} gap={'30px'}>
                     <Newbox>
                         <Box color={'#5e82f4'} p={'20px'} textAlign={'center'}>
@@ -51,7 +53,7 @@ export const Deatils = () => {
                                 />
                             </Flex>
                             <Heading>{data.name}</Heading>
-                            <Heading fontSize={'120px'}>{Math.round(data.main.temp - 273)}<sup>o</sup>C</Heading>
+                            <Heading fontSize={['100px', '120px', '120px', '100px', '120px']}>{Math.round(data.main.temp - 273)}<sup>o</sup>C</Heading>
                             <Heading>{data.weather[0].main}</Heading>
                         </Box>
                     </Newbox>
@@ -77,19 +79,23 @@ export const Deatils = () => {
                     </Newbox>
 
                 </Grid>
-            </Box>
+
+                <Grid mt={'60px'} templateColumns={['repeat(2, 1fr)', 'repeat(3, 1fr)', 'repeat(4, 1fr)', 'repeat(5, 1fr)', 'repeat(7, 1fr)']} gap={'20px'}>
+                    <ForcastBox></ForcastBox>
+                    <ForcastBox></ForcastBox>
+                    <ForcastBox></ForcastBox>
+                    <ForcastBox></ForcastBox>
+                    <ForcastBox></ForcastBox>
+                    <ForcastBox></ForcastBox>
+                    <ForcastBox></ForcastBox>
+                </Grid>
+            </Box >
         </>
     );
 };
 
 
-const Newbox = ({ children }) => {
-    return (
-        <Box overflow={'hidden'} shadow={'0px 0px 30px 6px #E2E2E2'} borderRadius={'30px'} h={'300px'}>
-            {children}
-        </Box>
-    )
-}
 
-const NewText = ({ children }) => <Text color={'white'} fontWeight={500} mt={'15px'} fontSize={'18px'}>{children}</Text>
+
+
 
