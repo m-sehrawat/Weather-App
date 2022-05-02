@@ -1,25 +1,21 @@
-import { Box, Flex, Grid, Heading, Icon, Text, useToast, VStack } from "@chakra-ui/react";
+import { Box, Flex, Grid, Heading, Icon, Text, useToast } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { celsius, dateFormat } from "../helpers/extraFunctions";
+import { shallowEqual, useDispatch, useSelector } from "react-redux";
+import { celsius } from "../helpers/extraFunctions";
 import { getItem } from "../helpers/sessionStorage";
 import { getWeatherByLocation, syncData } from "../redux/actions";
 import { Error } from "./Error";
 import { Loading } from "./Loading";
 import { Map } from "./Map";
 import { FaSyncAlt } from "react-icons/fa";
-import { ImSun } from "react-icons/im";
-import { MdOutlineNightsStay } from "react-icons/md";
-import { ForcastBox, Newbox, NewText } from "./SmallComponents";
+import { Newbox, NewText } from "./SmallComponents";
+import { Forcast } from "./Forcast";
 
 
 export const Deatils = () => {
 
-    const { isLoading, weatherData: data, forcastData, isError } = useSelector((state) => state);
-
-
+    const { isLoading, weatherData: data, forcastData, isError } = useSelector((state) => state, shallowEqual);
     const [isRotate, setIsRotate] = useState(false);
-
     const dispatch = useDispatch();
     const toast = useToast();
 
@@ -27,7 +23,6 @@ export const Deatils = () => {
         let weather = getItem("weather");
         console.log('weather:', weather)
         !weather && dispatch(getWeatherByLocation(toast));
-
     }, []);
 
     const handleSyncData = () => {
@@ -58,6 +53,7 @@ export const Deatils = () => {
                             <Heading>{data.weather[0].main}</Heading>
                         </Box>
                     </Newbox>
+
                     <Newbox>
                         <Grid templateColumns={'50% 50%'} h={'100%'} p={'8px'}>
                             <Box py={'10px'} pl={'15%'}>
@@ -75,37 +71,14 @@ export const Deatils = () => {
                             </Box>
                         </Grid>
                     </Newbox>
-                    <Newbox>
-                        {/* <Map city={data.name} /> */}
-                    </Newbox>
 
+                    <Newbox>
+                        <Map city={data.name} />
+                    </Newbox>
                 </Grid>
 
                 <Grid mt={'60px'} templateColumns={['repeat(2, 1fr)', 'repeat(3, 1fr)', 'repeat(4, 1fr)', 'repeat(5, 1fr)', 'repeat(8, 1fr)']} gap={'20px'}>
-                    {forcastData.map((e) => {
-                        const { date, day } = dateFormat(e.dt);
-
-                        return (
-                            <ForcastBox>
-                                <Box p={'5px'} bg={'#5e82f4'}>
-                                    <Text fontWeight={500} color={'white'} fontSize={'18px'}>{date}</Text>
-                                    <Text fontWeight={500} color={'white'} fontSize={'18px'}>{day}</Text>
-                                </Box>
-                                <Box mt={'10px'}>
-                                    <Text color={'#5e82f4'} fontWeight={500} fontSize={'27px'}>
-                                        <Icon as={ImSun} /> {Math.round(e.temp.day)}<sup>o</sup> C
-                                    </Text>
-                                    <Text color={'#5e82f4'} fontWeight={500} fontSize={'27px'}>
-                                        <Icon as={MdOutlineNightsStay} /> {Math.round(e.temp.night)}<sup>o</sup> C
-                                    </Text>
-                                    <Text color={'#5e82f4'} fontWeight={500} fontSize={'20px'}>
-                                        {e.weather[0].main}
-                                    </Text>
-                                </Box>
-                            </ForcastBox>
-                        )
-                    })}
-
+                    {forcastData.map((e, i) => <Forcast key={i} data={e} />)}
                 </Grid>
             </Box >
         </>

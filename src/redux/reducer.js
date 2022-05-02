@@ -11,7 +11,11 @@ const initState = {
 export const reducer = (state = initState, { type, payload }) => {
     switch (type) {
         case GET_DATA_LOADING:
-            return { ...state, isLoading: true, isError: false };
+            return {
+                ...state,
+                isLoading: true,
+                isError: false
+            };
         case GET_DATA_SUCCESS:
             return {
                 ...state,
@@ -21,7 +25,11 @@ export const reducer = (state = initState, { type, payload }) => {
                 forcastData: payload.forcastData
             };
         case GET_DATA_ERROR:
-            return { ...state, isLoading: false, isError: true };
+            return {
+                ...state,
+                isLoading: false,
+                isError: true
+            };
         default:
             return state;
     }
