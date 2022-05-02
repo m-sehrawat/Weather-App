@@ -1,7 +1,7 @@
 import axios from "axios";
 import { weatherAppAPI } from "../helpers/API";
 import { myToast } from "../helpers/extraFunctions";
-import { setItem } from "../helpers/localStorage";
+import { setItem } from "../helpers/sessionStorage";
 import { GET_DATA_ERROR, GET_DATA_LOADING, GET_DATA_SUCCESS } from "./actionTypes";
 
 export const getDataLoading = () => {
@@ -24,8 +24,8 @@ export const getWeatherByLocation = (toast) => (dispatch) => {
             dispatch(getDataLoading());
             let res = await axios.get(`/weather?lat=${latitude}&lon=${longitude}&appid=${weatherAppAPI}`);
             dispatch(getDataSuccess(res.data));
-            myToast(toast, "Your location weather updated", "success")
             setItem("weather", res.data);
+            myToast(toast, "Your location weather updated", "success")
         } catch (err) {
             console.log(err);
             dispatch(getDataError());
@@ -45,9 +45,11 @@ export const getWeatherByCity = (city, toast) => async (dispatch) => {
         dispatch(getDataLoading());
         let res = await axios.get(`/weather?q=${city}&appid=${weatherAppAPI}`);
         dispatch(getDataSuccess(res.data));
-        myToast(toast, "City weather data updated", "success")
+        setItem("weather", res.data);
+        myToast(toast, "City weather data updated", "success");
     } catch (err) {
         console.log(err);
         dispatch(getDataError());
+        myToast(toast, "City weather data doesn't exist", "error");
     }
 }

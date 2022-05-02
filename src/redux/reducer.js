@@ -1,4 +1,4 @@
-import { getItem } from "../helpers/localStorage";
+import { getItem } from "../helpers/sessionStorage";
 import { GET_DATA_ERROR, GET_DATA_LOADING, GET_DATA_SUCCESS } from "./actionTypes";
 
 const initState = {

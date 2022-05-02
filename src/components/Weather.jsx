@@ -7,7 +7,6 @@ import { Box, Button, Flex, Grid, Heading } from "@chakra-ui/react";
 import { Deatils } from "./Details";
 import { getDataSuccess, getWeatherByCity, getWeatherByLocation } from "../redux/actions";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import { getItem, setItem } from "../helpers/localStorage";
 import { Loading } from "./Loading";
 import { Error } from "./Error";
 

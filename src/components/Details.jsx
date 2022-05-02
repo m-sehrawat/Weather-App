@@ -1,8 +1,8 @@
 import { Box, Grid, Heading, Text, useToast } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import { celsius, myToast } from "../helpers/extraFunctions";
-import { getItem } from "../helpers/localStorage";
+import { celsius } from "../helpers/extraFunctions";
+import { getItem } from "../helpers/sessionStorage";
 import { getWeatherByLocation } from "../redux/actions";
 import { Error } from "./Error";
 import { Loading } from "./Loading";
