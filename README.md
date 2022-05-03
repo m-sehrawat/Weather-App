@@ -1,5 +1,7 @@
 <h1 align="center">Weather App</h1> 
 
+![weather app cover](https://user-images.githubusercontent.com/91532881/166434542-76727ccb-0c98-4646-84fb-58e86d7ec3ff.png)
+
 <h2 align="center">Web application to show the current and upcoming week weather forecast.</h2>    
 
 <br />
@@ -34,6 +36,8 @@ This project is about building a web application to show a weather forecast usin
 To use the app, type a name of the city and click on search / press Enter or else click on Your location weather button, every time you click on button first if will check if the data is availabe in the session-storage or not, and if not then it will sent a network request else it will take the data from session-storage. 
 
 <br/>
+
+
 
 ![Mobile responsive](https://user-images.githubusercontent.com/91532881/166426445-3aeee29c-bca7-4d95-a082-70269bb192fd.png)
 
