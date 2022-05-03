@@ -60,11 +60,11 @@ export const Deatils = () => {
                                     <Text key={i} color={'#5e82f4'} fontWeight={500} mt={'15px'} fontSize={'18px'} >{e}</Text>
                                 ))}
                             </Box>
-                            <Box className="zoom" borderRadius={'30px'} bg={'#5e82f4'} py={'10px'} pl={'15%'}>
+                            <Box borderRadius={'30px'} bg={'#5e82f4'} py={'10px'} pl={'15%'}>
                                 <NewText>{celsius(data.main.feels_like)}<sup>o</sup> C</NewText>
                                 <NewText>{data.main.humidity}%</NewText>
                                 <NewText>{(data.wind.speed * 3.6).toFixed(2)} Km/h</NewText>
-                                <NewText>{data.visibility * 0.001} Km</NewText>
+                                <NewText>{(data.visibility * 0.001).toFixed(2)} Km</NewText>
                                 <NewText>{celsius(data.main.temp_max)}<sup>o</sup> C</NewText>
                                 <NewText>{celsius(data.main.temp_min)}<sup>o</sup> C</NewText>
                             </Box>
