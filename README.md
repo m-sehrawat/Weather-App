@@ -35,11 +35,14 @@ To use the app, type a name of the city and click on search / press Enter or els
 
 <br/>
 
+![Mobile responsive](https://user-images.githubusercontent.com/91532881/166426445-3aeee29c-bca7-4d95-a082-70269bb192fd.png)
+
 ![weatherapp](https://user-images.githubusercontent.com/91532881/166334689-ac7807e2-6d40-4a8f-b232-c53955f6ea03.png)
 
 ![weatherapp2](https://user-images.githubusercontent.com/91532881/166334796-48e0faa6-3e3c-46e5-9cd1-857da895379d.png)
 
-![weatherapp3](https://user-images.githubusercontent.com/91532881/166334850-6722b4d0-c7bb-4f0a-8977-7cfddf8c7116.png)
+https://user-images.githubusercontent.com/91532881/166426542-b271be2e-e7d9-4b3c-bfe7-5e9e51e26be4.mp4
+
 
 <br/>
 
