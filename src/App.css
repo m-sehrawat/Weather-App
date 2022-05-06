@@ -19,3 +19,29 @@
 .zoom:hover {
     transform: scale(1.05);
 }
+
+
+.tagLine {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+#madeByMohit {
+    color: #5e82f4;
+    font-weight: 500;
+    width: 0ch;
+    overflow: hidden;
+    white-space: nowrap;
+    animation: tagline 10s  infinite alternate;
+    border-right: 3px solid #5e82f4; 
+}
+
+@keyframes tagline {
+      0% {
+          width: 0ch;
+      }
+      50% {
+          width: 28ch;
+      }
+}

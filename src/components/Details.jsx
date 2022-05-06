@@ -35,7 +35,7 @@ export const Deatils = () => {
         <Error />
     ) : (
         <>
-            <Box maxW={'1400px'} m={'30px auto 10px'} p={'20px'} minH={'550px'}>
+            <Box maxW={'1400px'} m={'20px auto 5px'} p={'20px'} minH={'550px'}>
                 <Grid gridTemplateColumns={['100%', 'repeat(2, 1fr)', 'repeat(2, 1fr)', '30% 27.5% 38%']} gap={'30px'}>
                     <Newbox>
                         <Box color={'#5e82f4'} p={'20px'} textAlign={'center'}>
@@ -76,9 +76,13 @@ export const Deatils = () => {
                     </Newbox>
                 </Grid>
 
-                <Grid mt={'60px'} templateColumns={['repeat(2, 1fr)', 'repeat(3, 1fr)', 'repeat(4, 1fr)', 'repeat(5, 1fr)', 'repeat(8, 1fr)']} gap={'20px'}>
+                <Grid mt={'40px'} templateColumns={['repeat(2, 1fr)', 'repeat(3, 1fr)', 'repeat(4, 1fr)', 'repeat(5, 1fr)', 'repeat(8, 1fr)']} gap={'20px'}>
                     {forcastData.map((e, i) => <Forcast key={i} data={e} />)}
                 </Grid>
+
+                <div className="tagLine">
+                    <p id="madeByMohit">Made with ❤️ by Mohit Sehrawat</p>
+                </div>
             </Box >
         </>
     );
