@@ -132,18 +132,15 @@ npm run dev
 
 
 
-## Author
+<h2>📬 Contact</h2>
 
+If you want to contact me, you can reach me through below handles.
 
-👤 **Mohit Sehrawat**
+[![linkedin](https://img.shields.io/badge/Mohit_Sehrawat-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/m-sehrawat/)
+[![Twitter](https://img.shields.io/badge/Mohit_Sehrawat-20232A?style=for-the-badge&logo=Github&logoColor=white)](https://github.com/m-sehrawat/)
 
-- Github: [@m-sehrawat](https://github.com/m-sehrawat/)
-- Linkedin: [@m-sehrawat](https://www.linkedin.com/in/m-sehrawat/)
+© 2022 Mohit Sehrawat
 
-
-## 🤝 Contributing
-
-This project was created for educational purposes as part of the React web development curriculum; contributing is not accepted.
 
 
 ## Show your support
